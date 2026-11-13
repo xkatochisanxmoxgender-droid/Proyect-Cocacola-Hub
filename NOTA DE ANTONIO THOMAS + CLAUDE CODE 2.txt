@@ -4,11 +4,11 @@ ACLARACION: Este proyecto fue una combinación sobre MI CONOCIMIENTO y USO de la
 Todo el código en concreto lo hizo Claude code, pero la idea y los conceptos fue "mi idea" y corregi muchos errores en los códigos, hice que Claude generase códigos con pequeños errores para aprender con los datos de se me ha implementado.
 
 
- Qué quería hacer
+ Que quería hacer
 
-Quería hacer un proyecto real de Data Analysis + SQL con Python que cumpliera mi lista: dataset real, limpieza, Pandas, SQL, estadística descriptiva, visualizaciones, entre 5 y 10 conclusiones, GitHub y un README en inglés. La idea era analizar las ventas de Coca-Cola de los últimos 10 años, hasta 2026. Antes de empezar tuve que ver qué datos reales existen. Coca-Cola no publica ventas por producto ni por país en un archivo descargable. Lo público y verificable son los ingresos de la empresa (net operating revenues), que salen de sus informes a la SEC. Así que mi proyecto analiza los ingresos de la compañía, no las latas vendidas, y lo dejé claro en el README.(Que se encuentra abajo)
+Queria hacer un proyecto real de Data Analysis + SQL con Python que cumpliera mi lista: dataset real, limpieza, Pandas, SQL, estadística descriptiva, visualizaciones, entre 5 y 10 conclusiones, GitHub y un README en inglés. La idea era analizar las ventas de Coca-Cola de los últimos 10 años, hasta 2026. Antes de empezar tuve que ver qué datos reales existen. Coca-Cola no publica ventas por producto ni por país en un archivo descargable. Lo público y verificable son los ingresos de la empresa (net operating revenues), que salen de sus informes a la SEC. Así que mi proyecto analiza los ingresos de la compañía, no las latas vendidas, y lo dejé claro en el README.(Que se encuentra abajo)
 
- De dónde saqué los datos
+ De donde saque los datos
 
 Busqué en la web los ingresos anuales y trimestrales de 2016 a 2025. Como estamos en noviembre de 2026, también busqué los resultados del tercer trimestre de 2026: 13.380 millones de dólares, y 39.232 millones en los nueve meses, frente a 36.119 millones del año anterior. Con eso armé cuatro archivos CSV: ingresos anuales, ingresos trimestrales, utilidad bruta de 2021 a 2025 y el acumulado de nueve meses de 2025 contra 2026.
 
@@ -37,3 +37,5 @@ Los ingresos pasaron de 41,9 mil millones (2016) a 47,9 mil millones (2025). El 
  Límites y pendientes
 
 No tengo datos por producto. La caída de 2016-2018 coincide con la venta de operaciones de embotellado, así que no es solo falta de demanda. Me falta añadir el Q1 y el Q2 de 2026. Cuando lo suba a GitHub tengo que revisar que los gráficos se vean en el README.
+
+FUENTES: https://www.macrotrends.net/stocks/charts/KO/cocacola/revenue
