@@ -1,0 +1,39 @@
+ANOTACION: PROYECTO DE ANÁLISIS DE VENTAS DE COCA-COLA
+
+ACLARACION: Este proyecto fue una combinación sobre MI CONOCIMIENTO y USO de la inteligencia artificial llamada Claude code.
+Todo el código en concreto lo hizo Claude code, pero la idea y los conceptos fue "mi idea" y corregi muchos errores en los códigos, hice que Claude generase códigos con pequeños errores para aprender con los datos de se me ha implementado.
+
+
+ Qué quería hacer
+
+Quería hacer un proyecto real de Data Analysis + SQL con Python que cumpliera mi lista: dataset real, limpieza, Pandas, SQL, estadística descriptiva, visualizaciones, entre 5 y 10 conclusiones, GitHub y un README en inglés. La idea era analizar las ventas de Coca-Cola de los últimos 10 años, hasta 2026. Antes de empezar tuve que ver qué datos reales existen. Coca-Cola no publica ventas por producto ni por país en un archivo descargable. Lo público y verificable son los ingresos de la empresa (net operating revenues), que salen de sus informes a la SEC. Así que mi proyecto analiza los ingresos de la compañía, no las latas vendidas, y lo dejé claro en el README.(Que se encuentra abajo)
+
+ De dónde saqué los datos
+
+Busqué en la web los ingresos anuales y trimestrales de 2016 a 2025. Como estamos en noviembre de 2026, también busqué los resultados del tercer trimestre de 2026: 13.380 millones de dólares, y 39.232 millones en los nueve meses, frente a 36.119 millones del año anterior. Con eso armé cuatro archivos CSV: ingresos anuales, ingresos trimestrales, utilidad bruta de 2021 a 2025 y el acumulado de nueve meses de 2025 contra 2026.
+
+ Datos dudosos y qué hice con ellos
+
+Me faltaba un trimestre (el Q2 de 2019). Lo calculé restando al total del año los otros tres trimestres y lo marqué en una columna "note" para ser transparente. La utilidad bruta venía redondeada y lo dejé anotado. También intenté deducir el Q1 de 2026 con un dato de "últimos 12 meses", pero las cuentas daban un Q2 idéntico al Q3 y eso me pareció raro. Preferí no incluir el Q1 ni el Q2 de 2026 por separado antes que inventarlos. Eso queda pendiente para añadirlo desde los 10-Q de la SEC.
+
+ Cómo está hecho el código (analysis.py)
+
+Lo organicé en pasos:
+- Cargo los CSV con Pandas.
+- Limpio y valido. Reviso nulos y duplicados, creo la etiqueta de periodo (por ejemplo 2019Q2) y hago dos comprobaciones con assert: los cuatro trimestres de cada año tienen que sumar justo el total anual, y Q1+Q2+Q3 de 2025 tiene que coincidir con el acumulado de nueve meses. Las dos pasaron.
+- Paso los datos a una base SQLite en memoria y ejecuto las consultas de queries.sql. Uso LAG para el crecimiento anual, una ventana móvil de 12 meses, JOIN y AVG para la estacionalidad, y cálculo de márgenes.
+- Hago la estadística: media, mediana, desviación, coeficiente de variación, CAGR (crecimiento anual compuesto) y tendencia lineal.
+- Armo un modelo pequeño de proyección: el Q4 de 2026 es el Q4 de 2025 multiplicado por el crecimiento de los nueve meses de 2026. Lo probé una vez con 2025 y el error fue de -0,7%. Es una sola prueba, así que lo considero ilustrativo y no una predicción seria.
+- Genero 5 gráficos con matplotlib y las conclusiones con f-strings, para que los números salgan del cálculo y no de memoria.
+
+Problemas que tuve
+
+Un comando de terminal con llaves no creó las carpetas y los CSV fallaron. Vi el error, creé las carpetas y repetí los archivos. Después corregí una conclusión que decía que el Q3 de 2026 era "el trimestre más alto del dataset", porque faltaban el Q1 y el Q2 de 2026. Añadí esa aclaración.
+
+Resultados
+
+Los ingresos pasaron de 41,9 mil millones (2016) a 47,9 mil millones (2025). El mínimo fue en 2020 (33,0 mil millones) y desde entonces crecen al 7,7% anual. El crecimiento se frenó hasta 2025 (+1,9%), pero en 2026 acelera (+8,6% en nueve meses). El segundo trimestre es el más fuerte y el primero el más débil. El margen bruto sube de 60,3% a 61,6%.
+
+ Límites y pendientes
+
+No tengo datos por producto. La caída de 2016-2018 coincide con la venta de operaciones de embotellado, así que no es solo falta de demanda. Me falta añadir el Q1 y el Q2 de 2026. Cuando lo suba a GitHub tengo que revisar que los gráficos se vean en el README.
